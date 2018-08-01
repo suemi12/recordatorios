@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    tools:context=".view.AddReminderActivity">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp">
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_reminder_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_reminder_desc" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.button.MaterialButton
+                android:id="@+id/btn_add_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="32dp"
+                android:layout_below="@+id/til_reminder_description"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:icon="@drawable/ic_event"
+                android:text="@string/action_select_date"/>
+
+            <android.support.design.button.MaterialButton
+                android:id="@+id/btn_add_hour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="32dp"
+                android:layout_below="@+id/til_reminder_description"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:icon="@drawable/ic_watch"
+                android:text="@string/action_select_time"/>
+
+            <android.support.design.chip.ChipGroup
+                android:id="@+id/chipGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_below="@+id/btn_add_date"
+                android:layout_centerInParent="true"
+                app:checkedChip="@id/chip_priority_medium"
+                app:chipSpacing="16dp"
+                app:singleSelection="true">
+
+                <android.support.design.chip.Chip
+                    android:id="@+id/chip_priority_high"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/action_priority_high"
+                    app:chipBackgroundColor="@color/priorityHigh" />
+
+                <android.support.design.chip.Chip
+                    android:id="@+id/chip_priority_medium"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/action_priority_medium"
+                    app:chipBackgroundColor="@color/priorityMedium" />
+
+                <android.support.design.chip.Chip
+                    android:id="@+id/chip_priority_low"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/action_priority_low"
+                    app:chipBackgroundColor="@color/priorityLow"
+                    />
+
+            </android.support.design.chip.ChipGroup>
+
+            <Switch
+                android:id="@+id/swt_sheet_repetition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/chipGroup"
+                android:layout_centerInParent="true"
+                android:text="@string/action_add_repetition"
+                android:switchPadding="8dp"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btn_save_reminder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
+        android:src="@drawable/ic_save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp" />
+
+
+</android.support.constraint.ConstraintLayout>
