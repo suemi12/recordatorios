@@ -1,4 +1,4 @@
-package com.suemi_13_15.recordatorios.view;
+package com.suemi_13_15.recordatorios.view.reminder;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -13,13 +13,13 @@ import com.suemi_13_15.recordatorios.model.Reminder;
 
 import java.util.List;
                                                             //<tipo del holder>
-public class RemindersAdapters extends RecyclerView.Adapter<RemindersAdapters.ReminderHolder> {
+public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.ReminderHolder> {
 
     private Context context;
     private List<Reminder> reminders;
 
     //constructor DE LA CLASE
-    public  RemindersAdapters(Context context, List<Reminder> reminders) {
+    public RemindersAdapter(Context context, List<Reminder> reminders) {
         this.context = context; // por si lo ocupo para acceder a algun recurso
         this.reminders = reminders; // elementos a amostrar
 

@@ -1,4 +1,4 @@
-package com.suemi_13_15.recordatorios.view;
+package com.suemi_13_15.recordatorios.view.reminder;
 
 
 import android.content.Intent;
@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.suemi_13_15.recordatorios.R;
 import com.suemi_13_15.recordatorios.model.Reminder;
+import com.suemi_13_15.recordatorios.view.reminder.add.AddReminderActivity;
 
 import java.util.ArrayList;
 
@@ -61,7 +62,7 @@ public class RemindersFragment extends Fragment implements View.OnClickListener 
         reminders.add(r2);
         reminders.add(r3);
 
-        RemindersAdapters adapters = new RemindersAdapters(getContext(), reminders);
+        RemindersAdapter adapters = new RemindersAdapter(getContext(), reminders);
         recyclerReminders.setAdapter(adapters);
     }
 

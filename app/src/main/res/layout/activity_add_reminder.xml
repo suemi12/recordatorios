@@ -5,17 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
-    tools:context=".view.AddReminderActivity">
-
-    <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    tools:context=".view.reminder.add.AddReminderActivity">
 
         <RelativeLayout
+            android:id="@+id/container_reminder_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -68,7 +61,8 @@
                 android:layout_centerInParent="true"
                 app:checkedChip="@id/chip_priority_medium"
                 app:chipSpacing="16dp"
-                app:singleSelection="true">
+                app:singleSelection="true"
+                android:layout_marginBottom="16dp">
 
                 <android.support.design.chip.Chip
                     android:id="@+id/chip_priority_high"
@@ -103,18 +97,30 @@
 
             </android.support.design.chip.ChipGroup>
 
-            <Switch
-                android:id="@+id/swt_sheet_repetition"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/chipGroup"
-                android:layout_centerInParent="true"
-                android:text="@string/action_add_repetition"
-                android:switchPadding="8dp"/>
+            <!--<Switch-->
+                <!--android:id="@+id/swt_sheet_repetition"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/chipGroup"-->
+                <!--android:layout_centerInParent="true"-->
+                <!--android:text="@string/action_add_repetition"-->
+                <!--android:switchPadding="8dp"/> -->
 
         </RelativeLayout>
 
-    </ScrollView>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_configuration"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layoutManager="android.support.v7.widget.GridLayoutManager"
+        app:spanCount="3"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/container_reminder_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </android.support.v7.widget.RecyclerView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/btn_save_reminder"

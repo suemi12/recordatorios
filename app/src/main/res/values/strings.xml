@@ -17,4 +17,5 @@
     <string name="action_ok">Aceptar</string>
     <string name="action_cancel">Cancelar</string>
     <string name="action_add_repetition">Añadir una repetición</string>
+    <string name="tipo">Repetición</string>
 </resources>

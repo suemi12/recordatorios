@@ -17,7 +17,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.AddReminderActivity"></activity>
+        <activity android:name=".view.reminder.add.AddReminderActivity"></activity>
     </application>
 
 </manifest>

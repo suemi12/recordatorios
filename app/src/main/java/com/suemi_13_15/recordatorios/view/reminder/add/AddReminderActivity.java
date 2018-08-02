@@ -1,4 +1,4 @@
-package com.suemi_13_15.recordatorios.view;
+package com.suemi_13_15.recordatorios.view.reminder.add;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -8,19 +8,18 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.DatePicker;
-import android.widget.RadioGroup;
-import android.widget.Switch;
 import android.widget.TimePicker;
 
 import com.suemi_13_15.recordatorios.R;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class AddReminderActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
@@ -28,7 +27,6 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
     private FloatingActionButton btnSaveReminder;
     private Button btnDateReminder;
     private Button btnHourReminder;
-    private Switch swtSheetRepetition;
     private TextInputLayout reminderDescription;
     private static final String CERO = "0";
     private static final String BARRA = "/";
@@ -46,6 +44,7 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
     //Variables para obtener la hora
     final int hora = c.get(Calendar.HOUR_OF_DAY);
     final int minuto = c.get(Calendar.MINUTE);
+    private RecyclerView recyclerConfiguration;
 
 
     @Override
@@ -57,21 +56,23 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
         btnDateReminder = findViewById(R.id.btn_add_date);
         btnHourReminder = findViewById(R.id.btn_add_hour);
         reminderDescription = findViewById(R.id.til_reminder_description);
-        swtSheetRepetition = findViewById(R.id.swt_sheet_repetition);
+        recyclerConfiguration = findViewById(R.id.recycler_configuration);
         btnSaveReminder.setOnClickListener(this);
         btnDateReminder.setOnClickListener(this);
         btnHourReminder.setOnClickListener(this);
         reminderDescription.getEditText().addTextChangedListener(this);
-        swtSheetRepetition.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if (isChecked) {
-                    showBottomSheetDialog();
 
-                }
+        ArrayList<Configuration> configurations = new ArrayList<>();
 
-            }
-        });
+        Configuration repetition = new Configuration();
+
+        repetition.setTitle(R.string.tipo); //Todo Poner id del recurso y añadir recurso en strings
+        repetition.setImage(R.drawable.ic_loop);
+        configurations.add(repetition);
+
+        ConfigurationAdapter adapter = new ConfigurationAdapter(this, configurations);
+
+        recyclerConfiguration.setAdapter(adapter);
     }
 
     public void showBottomSheetDialog() {
@@ -111,6 +112,11 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
             case R.id.btn_save_reminder:
                 isValidData();
                 break;
+            case R.id.img_configuration_icon:
+                showBottomSheetDialog();
+                break;
+
+
         }
 
     }
@@ -206,4 +212,8 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
     }
 
 
+    public void onClickConfiguration(Configuration configuration) {
+
+
+    }
 }
