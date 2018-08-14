@@ -2,8 +2,10 @@ package com.suemi_13_15.recordatorios.view.reminder.add;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.support.design.chip.ChipGroup;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -15,10 +17,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.NumberPicker;
 import android.widget.TimePicker;
 
 import com.suemi_13_15.recordatorios.R;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -27,6 +32,8 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
     private FloatingActionButton btnSaveReminder;
     private Button btnDateReminder;
     private Button btnHourReminder;
+    private BottomSheetDialog sheetDialog;
+    private ChipGroup chipGroup;
     private TextInputLayout reminderDescription;
     private static final String CERO = "0";
     private static final String BARRA = "/";
@@ -57,30 +64,72 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
         btnHourReminder = findViewById(R.id.btn_add_hour);
         reminderDescription = findViewById(R.id.til_reminder_description);
         recyclerConfiguration = findViewById(R.id.recycler_configuration);
+        chipGroup = findViewById(R.id.chipGroup);
         btnSaveReminder.setOnClickListener(this);
         btnDateReminder.setOnClickListener(this);
         btnHourReminder.setOnClickListener(this);
         reminderDescription.getEditText().addTextChangedListener(this);
 
+
         ArrayList<Configuration> configurations = new ArrayList<>();
 
         Configuration repetition = new Configuration();
-
-        repetition.setTitle(R.string.tipo); //Todo Poner id del recurso y añadir recurso en strings
+        repetition.setTitle(R.string.title_config_repetition);
         repetition.setImage(R.drawable.ic_loop);
         configurations.add(repetition);
+
+        Configuration sound = new Configuration();
+        sound.setTitle(R.string.title_config_sound);
+        sound.setImage(R.drawable.ic_soud);
+        configurations.add(sound);
+
+        Configuration vibration = new Configuration();
+        vibration.setTitle(R.string.title_config_vibration);
+        vibration.setImage(R.drawable.ic_vibration);
+        configurations.add(vibration);
 
         ConfigurationAdapter adapter = new ConfigurationAdapter(this, configurations);
 
         recyclerConfiguration.setAdapter(adapter);
     }
 
-    public void showBottomSheetDialog() {
+    public void showDialogRepetition() {
         View view = getLayoutInflater().inflate(R.layout.bottom_sheet_repetition, null);
+        Button btnOk = view.findViewById(R.id.btn_ok);
+        Button btnCancel = view.findViewById(R.id.btn_cancel);
+        NumberPicker numberPicker = view.findViewById(R.id.number_picker_repetition);
+        final String[] arrayString = new String[]{"Diario","Semanal","Mensual"};
+        numberPicker.setMinValue(0);
+        numberPicker.setMaxValue(arrayString.length-1);
+        numberPicker.setWrapSelectorWheel(false);
+        numberPicker.setFormatter(new NumberPicker.Formatter() {
+            @Override
+            public String format(int i) {
+                return arrayString[i];
+            }
+        });
 
-        BottomSheetDialog dialog = new BottomSheetDialog(this);
-        dialog.setContentView(view);
-        dialog.show();
+        try {
+            Method method = numberPicker.getClass().getDeclaredMethod("changeValueByOne", boolean.class);
+            method.setAccessible(true);
+            method.invoke(numberPicker, true);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+
+        btnOk.setOnClickListener(this);
+        btnCancel.setOnClickListener(this);
+
+        sheetDialog = new BottomSheetDialog(this);
+        sheetDialog.setContentView(view);
+        sheetDialog.show();
     }
 
 
@@ -112,8 +161,11 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
             case R.id.btn_save_reminder:
                 isValidData();
                 break;
-            case R.id.img_configuration_icon:
-                showBottomSheetDialog();
+            case R.id.btn_ok:
+
+                break;
+            case R.id.btn_cancel:
+                sheetDialog.dismiss();
                 break;
 
 
@@ -177,15 +229,21 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
 
     private Boolean isValidData() {
         if (reminderDescription.getEditText().getText().toString().isEmpty()) {
-            reminderDescription.setError(getString(R.string.reminder_description_error));
+            reminderDescription.setError(getString(R.string.error_reminder_description));
             return false;
         }
         if (btnDateReminder.getText().equals(getText(R.string.action_select_date))) {
-            btnDateReminder.setError(getString(R.string.reminder_date_error));
+            btnDateReminder.setError(getString(R.string.error_reminder_date));
             return false;
         }
         if (btnHourReminder.getText().equals(getText(R.string.action_select_time))) {
-            btnHourReminder.setError(getString(R.string.reminder_hour_error));
+            btnHourReminder.setError(getString(R.string.error_reminder_hour));
+            return false;
+        }
+        if (chipGroup.getCheckedChipId() == -1) {
+            Snackbar snackbar = Snackbar
+                    .make(reminderDescription, R.string.error_missing_priority, Snackbar.LENGTH_LONG);
+            snackbar.show();
             return false;
         }
         return false;
@@ -213,6 +271,10 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
 
 
     public void onClickConfiguration(Configuration configuration) {
+        if (configuration.getTitle() == R.string.title_config_repetition) {
+        showDialogRepetition();
+        }
+
 
 
     }

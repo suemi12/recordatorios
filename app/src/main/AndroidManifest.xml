@@ -9,15 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.MainActivity" />
-        <activity android:name=".view.SplashActivity">
+        <activity android:name=".view.MainActivity"
+            android:theme="@style/NoActionBar"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.SplashActivity"
+            android:theme="@style/NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.reminder.add.AddReminderActivity"></activity>
+        <activity android:name=".view.reminder.add.AddReminderActivity"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

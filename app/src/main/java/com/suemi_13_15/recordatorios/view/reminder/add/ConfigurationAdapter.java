@@ -1,6 +1,5 @@
 package com.suemi_13_15.recordatorios.view.reminder.add;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +13,7 @@ import com.suemi_13_15.recordatorios.R;
 import java.util.List;
 
 //<tipo del holder>
-public class ConfigurationAdapter extends RecyclerView.Adapter<ConfigurationAdapter.ConfigurationHolder> {
+public class ConfigurationAdapter extends RecyclerView.Adapter<ConfigurationAdapter.ConfigurationHolder>  {
 
     private AddReminderActivity activity;
     private List<Configuration> configurations;
@@ -44,7 +43,7 @@ public class ConfigurationAdapter extends RecyclerView.Adapter<ConfigurationAdap
 //ACCEDER AL ELEMENTO CONFIGURACION DE LA LISTA EN LA POSICION CORRESPONDIENTE
          final Configuration configuration = configurations.get(position);
 //LLENADO DE LA VISTA A TRAVEZ DE EL HOLDER
-        holder.title.setText(activity.getString(configuration.getTitle())); //Todo obtener strings con context.getString(configuration.getTitle())
+        holder.title.setText(activity.getString(configuration.getTitle()));
         holder.value.setText(configuration.getValue());
         holder.icon.setImageResource(configuration.getImage());
         holder.icon.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +54,7 @@ public class ConfigurationAdapter extends RecyclerView.Adapter<ConfigurationAdap
             }
         });
 
-        //Todo agregar listener a los elementos del recycler
+
 
     }
 

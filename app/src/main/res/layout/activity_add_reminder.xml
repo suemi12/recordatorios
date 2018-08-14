@@ -12,13 +12,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp">
+            android:layout_marginStart="8dp">
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/til_reminder_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
 
 
@@ -97,20 +99,13 @@
 
             </android.support.design.chip.ChipGroup>
 
-            <!--<Switch-->
-                <!--android:id="@+id/swt_sheet_repetition"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_below="@+id/chipGroup"-->
-                <!--android:layout_centerInParent="true"-->
-                <!--android:text="@string/action_add_repetition"-->
-                <!--android:switchPadding="8dp"/> -->
+
 
         </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_configuration"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         app:layoutManager="android.support.v7.widget.GridLayoutManager"
         app:spanCount="3"
